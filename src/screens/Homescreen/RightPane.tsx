@@ -67,11 +67,16 @@ const AddButton = styled.button`
 const StyledPane = styled.div`
   padding: 2rem;
   background: #fafafa;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60%;
 `;
 
 const Folder = styled.div`
   // background: red;
   margin-top: 0;
+  margin-bottom: 1rem;
 `;
 
 const Cards = styled.div`
@@ -104,6 +109,7 @@ const Icons = styled.div`
   display: flex;
   gap: 0.5rem;
   font-size: 1.25rem;
+  padding-right: 1rem;
 `;
 
 const SmallLogo = styled.img`
@@ -122,6 +128,94 @@ const RightPane = () => {
         </AddButton>
       </Header>
 
+      <Folder>
+        <Header variant="folder">
+          <Heading size="small">Data Structures</Heading>
+          <AddButton>
+            <span>+</span> New playground
+          </AddButton>
+        </Header>
+
+        <Cards>
+          <Card>
+            <SmallLogo src="/logo.png" alt="" />
+            <CardContent>
+              <h5>Stack Implementation</h5>
+              <p>Language: Java</p>
+            </CardContent>
+            <div className="icons">
+              <IoTrashOutline />
+              <CiEdit />
+            </div>
+          </Card>
+          <Card>
+            <SmallLogo src="/logo.png" alt="" />
+            <CardContent>
+              <h5>Stack Implementation</h5>
+              <p>Language: Java</p>
+            </CardContent>
+            <div className="icons">
+              <IoTrashOutline />
+              <CiEdit />
+            </div>
+          </Card>
+          <Card>
+            <SmallLogo src="/logo.png" alt="" />
+            <CardContent>
+              <h5>Stack Implementation</h5>
+              <p>Language: Java</p>
+            </CardContent>
+            <div className="icons">
+              <IoTrashOutline />
+              <CiEdit />
+            </div>
+          </Card>
+        </Cards>
+      </Folder>
+      <Folder>
+        <Header variant="folder">
+          <Heading size="small">Data Structures</Heading>
+          <AddButton>
+            <span>+</span> New playground
+          </AddButton>
+        </Header>
+
+        <Cards>
+          <Card>
+            <SmallLogo src="/logo.png" alt="" />
+            <CardContent>
+              <h5>Stack Implementation</h5>
+              <p>Language: Java</p>
+            </CardContent>
+            <div className="icons">
+              <IoTrashOutline />
+              <CiEdit />
+            </div>
+          </Card>
+          <Card>
+            <SmallLogo src="/logo.png" alt="" />
+            <CardContent>
+              <h5>Stack Implementation</h5>
+              <p>Language: Java</p>
+            </CardContent>
+            <div className="icons">
+              <IoTrashOutline />
+              <CiEdit />
+            </div>
+          </Card>
+          <Card>
+            <SmallLogo src="/logo.png" alt="" />
+            <CardContent>
+              <h5>Stack Implementation</h5>
+              <p>Language: Java</p>
+            </CardContent>
+            <div className="icons">
+              <IoTrashOutline />
+              <CiEdit />
+            </div>
+          </Card>
+        </Cards>
+      </Folder>
       <Folder>
         <Header variant="folder">
           <Heading size="small">Data Structures</Heading>
