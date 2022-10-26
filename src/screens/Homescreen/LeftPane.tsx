@@ -51,6 +51,7 @@ const Button = styled.a`
     font-size: 2rem;
   }
 
+  transition: all 0.25s ease;
   &:hover {
     opacity: 0.9;
     transform: scale(1.2);
@@ -69,7 +70,7 @@ const LeftPane = () => {
         </Heading>
         <SubHeading>Code.. Complie.. Debug..</SubHeading>
         <Button>
-          <span>+</span> Create a Playground.
+          <span>+</span> Create a Playground
         </Button>
       </LeftContent>
     </StyledLeftPane>
