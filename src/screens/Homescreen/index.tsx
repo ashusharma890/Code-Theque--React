@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import Modal from "../../components/Modal";
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
+import { ModalContext } from "../../context/ModalContext";
 
 const HomeScreenSection = styled.div`
   // display: grid;
@@ -12,10 +14,14 @@ const HomeScreenSection = styled.div`
 `;
 
 const HomeScreen = () => {
+  const ModalFeatures = useContext(ModalContext)!;
+  const isOpen = ModalFeatures.isOpen;
+
   return (
     <HomeScreenSection>
       <LeftPane />
       <RightPane />
+      {isOpen.value === true ? <Modal /> : <></>}
     </HomeScreenSection>
   );
 };

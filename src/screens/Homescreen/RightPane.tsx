@@ -1,8 +1,11 @@
-import React from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { IoTrashOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
-import { BsToggleOff } from "react-icons/bs";
+// import { BsToggleOff } from "react-icons/bs";
+import { ModalContext } from "../../context/ModalContext";
+import { PlaygroundContext } from "../../context/PlaygroundContext";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   readonly variant: string;
@@ -76,7 +79,7 @@ const StyledPane = styled.div`
 const Folder = styled.div`
   // background: red;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const Cards = styled.div`
@@ -93,6 +96,13 @@ const Card = styled.div`
   padding: 0.6rem;
   gap: 1rem;
   box-shadow: 0px 0px 12px -3px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 `;
 
 const CardContent = styled.div`
@@ -116,150 +126,127 @@ const SmallLogo = styled.img`
   width: 75px;
 `;
 
+const FolderButtons = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const RightPane = () => {
+  const navigate = useNavigate();
+  const makeAvailableGlobally = useContext(ModalContext)!;
+  const { openModal } = makeAvailableGlobally;
+
+  const PlaygroundFeatures = useContext(PlaygroundContext)!;
+  const Folders = PlaygroundFeatures.folders;
+  const { deleteCard, deleteFolder } = PlaygroundFeatures;
+
   return (
     <StyledPane>
       <Header variant="main">
         <Heading size="large">
           My <span>Playgrounds</span>
         </Heading>
-        <AddButton className="addbutton">
+        <AddButton
+          onClick={() => {
+            openModal({
+              value: true,
+              type: "4",
+              identifier: {
+                folderId: "",
+                cardId: "",
+              },
+            });
+          }}
+        >
           <span>+</span> New Folder
         </AddButton>
       </Header>
 
-      <Folder>
-        <Header variant="folder">
-          <Heading size="small">Data Structures</Heading>
-          <AddButton>
-            <span>+</span> New playground
-          </AddButton>
-        </Header>
+      {Object.entries(Folders).map(
+        ([folderId, folder]: [folderId: string, folder: any]) => (
+          <Folder>
+            <Header variant="folder">
+              <Heading size="small">{folder.title}</Heading>
+              <FolderButtons>
+                <Icons>
+                  <IoTrashOutline
+                    onClick={() => {
+                      deleteFolder(folderId);
+                    }}
+                  />
+                  <CiEdit
+                    onClick={() => {
+                      openModal({
+                        value: true,
+                        type: "2",
+                        identifier: {
+                          folderId: folderId,
+                          cardId: "",
+                        },
+                      });
+                    }}
+                  />
+                </Icons>
+                <AddButton
+                  onClick={() => {
+                    openModal({
+                      value: true,
+                      type: "3",
+                      identifier: {
+                        folderId: folderId,
+                        cardId: "",
+                      },
+                    });
+                  }}
+                >
+                  <span>+</span> New playground
+                </AddButton>
+              </FolderButtons>
+            </Header>
 
-        <Cards>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-        </Cards>
-      </Folder>
-      <Folder>
-        <Header variant="folder">
-          <Heading size="small">Data Structures</Heading>
-          <AddButton>
-            <span>+</span> New playground
-          </AddButton>
-        </Header>
-
-        <Cards>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-        </Cards>
-      </Folder>
-      <Folder>
-        <Header variant="folder">
-          <Heading size="small">Data Structures</Heading>
-          <AddButton>
-            <span>+</span> New playground
-          </AddButton>
-        </Header>
-
-        <Cards>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-          <Card>
-            <SmallLogo src="/logo.png" alt="" />
-            <CardContent>
-              <h5>Stack Implementation</h5>
-              <p>Language: Java</p>
-            </CardContent>
-            <div className="icons">
-              <IoTrashOutline />
-              <CiEdit />
-            </div>
-          </Card>
-        </Cards>
-      </Folder>
+            <Cards>
+              {Object.entries(folder.items).map(
+                ([cardId, card]: [cardId: string, card: any]) => (
+                  <Card
+                    onClick={() => {
+                      navigate(`/code/${folderId}/${cardId}`);
+                    }}
+                  >
+                    <SmallLogo src="/logo.png" alt="" />
+                    <CardContent>
+                      <h5>{card.title}</h5>
+                      <p>Language: {card.language}</p>
+                    </CardContent>
+                    <Icons
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <IoTrashOutline
+                        onClick={() => {
+                          deleteCard(folderId, cardId);
+                        }}
+                      />
+                      <CiEdit
+                        onClick={() => {
+                          openModal({
+                            value: true,
+                            type: "1",
+                            identifier: {
+                              folderId: folderId,
+                              cardId: cardId,
+                            },
+                          });
+                        }}
+                      />
+                    </Icons>
+                  </Card>
+                )
+              )}
+            </Cards>
+          </Folder>
+        )
+      )}
     </StyledPane>
   );
 };
