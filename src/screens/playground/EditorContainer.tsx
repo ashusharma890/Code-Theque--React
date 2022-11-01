@@ -100,10 +100,15 @@ const SubmitBtn = styled.button`
   border-radius: 2rem;
 `;
 
-const EditorContainer = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState(null);
-  const [selectedTheme, setSelectedTheme] = useState(null);
+interface EditorContainerProps {
+  title: string;
+  language: string;
+}
 
+const EditorContainer: React.FC<EditorContainerProps> = ({
+  title,
+  language,
+}) => {
   const languageOptions = [
     { value: "c++", label: " C++" },
     { value: "java", label: " Java" },
@@ -123,6 +128,18 @@ const EditorContainer = () => {
     { value: "xcodeLight", label: " XcodeLight" },
   ];
 
+  const [selectedLanguage, setSelectedLanguage] = useState(() => {
+    for (let i = 0; i < languageOptions.length; i++) {
+      if (languageOptions[i].value === language) return languageOptions[i];
+    }
+
+    return languageOptions[0];
+  });
+  const [selectedTheme, setSelectedTheme] = useState({
+    value: "dracula",
+    label: " Dracula",
+  });
+
   const handleChangeLanguage = (selectedOption: any) => {
     setSelectedLanguage(selectedOption);
   };
@@ -135,7 +152,7 @@ const EditorContainer = () => {
     <EditorBox>
       <UpperToolBar>
         <Title>
-          <h3>Stack implementation</h3>
+          <h3>{title}</h3>
           <button>
             <BiEditAlt />
           </button>
@@ -154,7 +171,10 @@ const EditorContainer = () => {
         </DropDowns>
       </UpperToolBar>
 
-      <CodeEditor />
+      <CodeEditor
+        currentLanguage={selectedLanguage.value}
+        currentTheme={selectedTheme.value}
+      />
 
       <LowerToolBar>
         <Button>

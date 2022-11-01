@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const NavbarContainer = styled.div`
@@ -9,10 +10,13 @@ const NavbarContainer = styled.div`
   justify-content: center;
 `;
 
-const Navbarcontent = styled.div`
+const Navbarcontent = styled.button`
   display: flex;
   align-items: center;
   gap: 0.9rem;
+  border: 0;
+  outline: 0;
+  background: transparent;
 `;
 
 const Logo = styled.img`
@@ -31,9 +35,15 @@ const MainHeading = styled.h1`
 `;
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <NavbarContainer>
-      <Navbarcontent>
+      <Navbarcontent
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <Logo src="/logo.png" alt="" />
         <MainHeading>
           <span>Code</span> Theque

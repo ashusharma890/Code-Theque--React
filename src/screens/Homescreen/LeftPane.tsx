@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ModalContext } from "../../context/ModalContext";
+import { PlaygroundContext } from "../../context/PlaygroundContext";
 
 const StyledLeftPane = styled.div`
   position: fixed;
@@ -67,6 +69,8 @@ const Button = styled.a`
 `;
 
 const LeftPane = () => {
+  const makeAvailableGlobally = useContext(ModalContext)!;
+  const { openModal } = makeAvailableGlobally;
   return (
     <StyledLeftPane>
       <LeftContent>
@@ -75,7 +79,18 @@ const LeftPane = () => {
           <span>Code</span> Theque
         </Heading>
         <SubHeading>Code.. Complie.. Debug..</SubHeading>
-        <Button>
+        <Button
+          onClick={() => {
+            openModal({
+              value: true,
+              type: "5",
+              identifier: {
+                folderId: "",
+                cardId: "",
+              },
+            });
+          }}
+        >
           <span>+</span> Create a Playground
         </Button>
       </LeftContent>

@@ -21,25 +21,37 @@ const InnerBox = styled.div`
   font-size: 1.2rem;
   font-weight: 700;
 
-  span{
+  button {
     display: flex;
-    align-items: cneter'
+    align-items: center;
     gap: 0.4rem;
     font-size: 1rem;
     font-weight: 400;
-    
-    svg{
+    border: 0;
+    outline: 0;
+    background: transparent;
+    transition: all 0.1s ease;
+
+    svg {
       font-size: 1.5rem;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
     }
   }
 `;
 
-const TextArea = styled.textarea`
+const StyledTextArea = styled.textarea`
   flex-grow: 1;
+  // display: none;
   resize: none;
   border: 0;
   outline: 0;
   font-size: 1.1rem;
+  padding: 0.5rem;
+  padding-top: 0.5rem;
 `;
 
 const InputConsole = () => {
@@ -47,12 +59,12 @@ const InputConsole = () => {
     <OuterBox>
       <InnerBox>
         Input:{" "}
-        <span>
+        <button>
           <BiImport />
           Import Input
-        </span>{" "}
+        </button>
       </InnerBox>
-      <TextArea></TextArea>
+      <StyledTextArea></StyledTextArea>
     </OuterBox>
   );
 };

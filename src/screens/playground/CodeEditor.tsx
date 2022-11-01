@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
 import { duotoneLight, duotoneDark } from "@uiw/codemirror-theme-duotone";
@@ -22,9 +22,36 @@ const CodeEditorBox = styled.div`
   }
 `;
 
-const CodeEditor = () => {
+interface CodeEditorProps {
+  currentLanguage: string;
+  currentTheme: string;
+}
+
+const CodeEditor: React.FC<CodeEditorProps> = ({
+  currentLanguage,
+  currentTheme,
+}) => {
   const [theme, setTheme] = useState<any>(githubDark);
   const [lang, setLang] = useState<any>(java);
+
+  useEffect(() => {
+    if (currentLanguage === "c++") setLang(cpp);
+    if (currentLanguage === "java") setLang(java);
+    if (currentLanguage === "javascript") setLang(javascript);
+    if (currentLanguage === "python") setLang(python);
+  }, [currentLanguage]);
+
+  useEffect(() => {
+    if (currentTheme === "duotoneLight") setTheme(duotoneLight);
+    if (currentTheme === "duotoneDark") setTheme(duotoneDark);
+    if (currentTheme === "githubLight") setTheme(githubLight);
+    if (currentTheme === "githubDark") setTheme(githubDark);
+    if (currentTheme === "xcodeDark") setTheme(xcodeDark);
+    if (currentTheme === "xcodeLight") setTheme(xcodeLight);
+    if (currentTheme === "okaidia") setTheme(okaidia);
+    if (currentTheme === "dracula") setTheme(dracula);
+    if (currentTheme === "bespin") setTheme(bespin);
+  }, [currentTheme]);
 
   return (
     <CodeEditorBox>

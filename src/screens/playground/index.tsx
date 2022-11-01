@@ -10,7 +10,6 @@ import styled from "styled-components";
 const MainApp = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  background: red;
   height: calc(100vh - 4.5rem);
 `;
 
@@ -24,14 +23,14 @@ const Playground = () => {
   const { folderId, playgroundId } = useParams();
 
   const { folders } = useContext(PlaygroundContext)!;
-  // const { title, language } =
-  //   folders[folderId as string].items[playgroundId as string];
+  const { title, language } =
+    folders[folderId as string].items[playgroundId as string];
 
   return (
     <div>
       <Navbar />
       <MainApp>
-        <EditorContainer />
+        <EditorContainer title={title} language={language} />
         <Consoles>
           <InputConsole />
           <OutputConsole />

@@ -20,15 +20,24 @@ const InnerBox = styled.div`
   font-size: 1.2rem;
   font-weight: 700;
 
-  span{
+  button {
     display: flex;
-    align-items: cneter'
+    align-items: center;
     gap: 0.4rem;
     font-size: 1rem;
     font-weight: 400;
-    
-    svg{
+    border: 0;
+    outline: 0;
+    background: transparent;
+    transition: all 0.1s ease;
+
+    svg {
       font-size: 1.5rem;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
     }
   }
 `;
@@ -37,6 +46,8 @@ const OutputArea = styled.div`
   background: #fff;
   flex-grow: 1;
   resize: none;
+  padding: 0.25rem;
+  padding-top: 0.5rem;
 `;
 
 const OutputConsole = () => {
@@ -44,10 +55,10 @@ const OutputConsole = () => {
     <OuterBox>
       <InnerBox>
         Output:
-        <span>
+        <button>
           <BiExport />
           Export Output
-        </span>
+        </button>
       </InnerBox>
       <OutputArea></OutputArea>
     </OuterBox>

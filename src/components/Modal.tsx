@@ -7,6 +7,7 @@ import EditCardTitle from "./modaltypes/EditCardTitle";
 import EditFolderTitle from "./modaltypes/EditFolderTitle";
 import NewCard from "./modaltypes/NewCard";
 import NewFolder from "./modaltypes/NewFolder";
+import NewFolderAndPlayground from "./modaltypes/NewFolderAndPlayground";
 
 export const ModalDiv = styled.div`
   background: rgba(0, 0, 0, 0.4);
@@ -64,39 +65,6 @@ export const Input = styled.div`
   }
 `;
 
-const EditModal = ({
-  closeModal,
-  isOpen,
-}: {
-  closeModal: () => void;
-  isOpen: any;
-}) => {
-  const PlaygroundFeatures = useContext(PlaygroundContext)!;
-  const folders = PlaygroundFeatures.folders;
-
-  const currentFolder = folders[isOpen.identifier.folderId];
-  const currentCard = currentFolder.items[isOpen.identifier.cardId];
-
-  return (
-    <>
-      <Header>
-        <h2 className="heading">Edit Card Title</h2>
-        <CloseBtn
-          onClick={() => {
-            closeModal();
-          }}
-        >
-          <RiCloseFill />
-        </CloseBtn>
-      </Header>
-      <Input>
-        <input type="text" value={currentCard.title} />
-        <button>Update Title</button>
-      </Input>
-    </>
-  );
-};
-
 export interface ModalProps {
   closeModal: () => void;
   identifier: {
@@ -130,6 +98,12 @@ const Modal = () => {
         )}
         {isOpen.type === "4" && (
           <NewFolder closeModal={closeModal} identifier={isOpen.identifier} />
+        )}
+        {isOpen.type === "5" && (
+          <NewFolderAndPlayground
+            closeModal={closeModal}
+            identifier={isOpen.identifier}
+          />
         )}
       </ModalBox>
     </ModalDiv>
