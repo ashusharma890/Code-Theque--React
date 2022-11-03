@@ -26,16 +26,21 @@ export const ModalDiv = styled.div`
 `;
 
 export const ModalBox = styled.div`
-  background: white;
+  background: var(--body);
   width: 35%;
   padding: 2rem;
   border-radius: 10px;
+  color: var(--color);
 `;
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  h2 {
+    color: var(--color) !important;
+  }
 `;
 
 export const CloseBtn = styled.button`
@@ -57,6 +62,7 @@ export const Input = styled.div`
   input {
     flex-grow: 1;
     height: 2rem;
+    background: var(--body);
   }
 
   button {

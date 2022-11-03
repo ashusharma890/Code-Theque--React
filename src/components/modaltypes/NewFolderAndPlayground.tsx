@@ -16,6 +16,7 @@ const InputWithSelect = styled.div`
   input {
     flex-grow: 1;
     height: 2rem;
+    background: var(--body) !important;
   }
 
   button {
@@ -25,6 +26,22 @@ const InputWithSelect = styled.div`
     color: white;
   }
 `;
+
+const customStyles = {
+  option: (provided: any, state: any) => ({
+    ...provided,
+    // borderBottom: "1px dotted pink",
+    background: state.isSelected ? "#0097d7" : "var(--body)",
+    color: state.isSelected ? "white" : "var(--color)",
+    // padding: 20,
+  }),
+  singleValue: (provided: any, state: any) => {
+    // const opacity = state.isDisabled ? 0.5 : 1;
+    // const transition = 'opacity 300ms';
+
+    return { ...provided };
+  },
+};
 
 const NewFolderAndPlayground = ({ closeModal, identifier }: ModalProps) => {
   const { folderId } = identifier;
@@ -79,6 +96,7 @@ const NewFolderAndPlayground = ({ closeModal, identifier }: ModalProps) => {
           options={languages}
           value={language}
           onChange={handleChangeLanguage}
+          styles={customStyles}
         />
 
         <button
