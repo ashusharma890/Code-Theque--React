@@ -1,11 +1,13 @@
-import { useContext } from "react";
-import styled from "styled-components";
+import { useContext, useState, useEffect } from "react";
+import styled, { useTheme } from "styled-components";
 import { IoTrashOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
-// import { BsToggleOff } from "react-icons/bs";
+import { BsToggleOff } from "react-icons/bs";
 import { ModalContext } from "../../context/ModalContext";
 import { PlaygroundContext } from "../../context/PlaygroundContext";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../context/ThemeContext";
+import DarkModeToggle from "react-dark-mode-toggle";
 
 interface HeaderProps {
   readonly variant: string;
@@ -37,6 +39,7 @@ const Header = styled.div<HeaderProps>`
 const Heading = styled.h3<HeadingProps>`
   font-weight: 400;
   font-size: ${(props) => (props.size === "large" ? "1.8rem" : "1.5rem")};
+  color: var(--color);
 
   span {
     font-weight: 700;
@@ -69,7 +72,7 @@ const AddButton = styled.button`
 
 const StyledPane = styled.div`
   padding: 2rem;
-  background: #fafafa;
+  background: var(--body);
   position: absolute;
   right: 0;
   top: 0;
@@ -95,7 +98,7 @@ const Card = styled.div`
   align-items: center;
   padding: 0.6rem;
   gap: 1rem;
-  box-shadow: 0px 0px 12px -3px rgba(0, 0, 0, 0.55);
+  box-shadow: var(--box-shadow);
   cursor: pointer;
   transition: all 0.1s ease;
 
@@ -112,6 +115,7 @@ const CardContent = styled.div`
     font-weight: 400;
     font-size: 1.2rem;
     margin-bottom: 0.25rem;
+    color: var(--color);
   }
 `;
 
@@ -140,8 +144,21 @@ const RightPane = () => {
   const Folders = PlaygroundFeatures.folders;
   const { deleteCard, deleteFolder } = PlaygroundFeatures;
 
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  useEffect(() => {
+    document.body.dataset.theme = "light";
+  }, []);
+
+  const setMode = () => {
+    document.body.dataset.theme = isDarkMode ? "dark" : "light";
+    setIsDarkMode(!isDarkMode);
+    console.log(isDarkMode ? "dark" : "light");
+  };
+
   return (
     <StyledPane>
+      <DarkModeToggle onChange={setMode} checked={!isDarkMode} size={80} />
       <Header variant="main">
         <Heading size="large">
           My <span>Playgrounds</span>

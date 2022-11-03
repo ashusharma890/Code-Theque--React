@@ -10,7 +10,7 @@ const StyledLeftPane = styled.div`
   left: 0;
   height: 100vh;
 
-  background: #39c395;
+  background: var(--body1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,6 +53,7 @@ const Button = styled.a`
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
+  color: var(--color1) !important;
 
   span {
     font-weight: 700;
@@ -63,8 +64,8 @@ const Button = styled.a`
   &:hover {
     opacity: 0.9;
     transform: scale(1.2);
-    background: white;
-    color: #111;
+    background: var(--color1);
+    color: #111 !important;
   }
 `;
 

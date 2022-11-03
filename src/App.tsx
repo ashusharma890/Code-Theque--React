@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ModalProvider from "./context/ModalContext";
 import PlaygroundProvider from "./context/PlaygroundContext";
 import HomeScreen from "./screens/Homescreen";
@@ -6,9 +6,14 @@ import Playground from "./screens/playground";
 import GlobalStyles from "./styles/globals";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import Page404 from "./screens/page404";
+import { ThemeContext } from "./context/ThemeContext";
+import { ThemeProvider } from "styled-components";
 
 function App() {
+  const { theme } = useContext(ThemeContext)!;
+
   return (
+    // <ThemeProvider>
     <PlaygroundProvider>
       <ModalProvider>
         <GlobalStyles />
@@ -26,6 +31,7 @@ function App() {
         </BrowserRouter>
       </ModalProvider>
     </PlaygroundProvider>
+    // </ThemeProvider>
   );
 }
 

@@ -3,15 +3,15 @@ import styled from "styled-components";
 import { BiExport } from "react-icons/bi";
 
 const OuterBox = styled.div`
-  background: white;
+  background: var(--body);
   display: flex;
   flex-direction: column;
 `;
 
 const InnerBox = styled.div`
   height: 4rem;
-  background: #ededed;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+  background: var(--body);
+  box-shadow: var(--textbox-shadow);
   z-index: 2;
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@ const InnerBox = styled.div`
 `;
 
 const OutputArea = styled.textarea`
-  background: #fff;
+  background: var(--body);
   flex-grow: 1;
   resize: none;
   padding: 0.25rem;
@@ -57,11 +57,23 @@ interface OutputConsoleProps {
 }
 
 const OutputConsole: React.FC<OutputConsoleProps> = ({ currentOutput }) => {
+  const exportUserOutput = () => {
+    const fileData = JSON.stringify(currentOutput);
+    // const jsonToTxt = require("json-to-txt");
+    // const dataInString = jsonToTxt({ data: fileData  });
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = "output.json";
+    link.href = url;
+    link.click();
+  };
+
   return (
     <OuterBox>
       <InnerBox>
         Output:
-        <button>
+        <button onClick={exportUserOutput}>
           <BiExport />
           Export Output
         </button>

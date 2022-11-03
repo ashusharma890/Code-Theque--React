@@ -9,6 +9,7 @@ import NewCard from "./modaltypes/NewCard";
 import NewFolder from "./modaltypes/NewFolder";
 import NewFolderAndPlayground from "./modaltypes/NewFolderAndPlayground";
 import Loading from "./modaltypes/Loading";
+import Saved from "./modaltypes/Saved";
 
 export const ModalDiv = styled.div`
   background: rgba(0, 0, 0, 0.4);
@@ -107,6 +108,7 @@ const Modal = () => {
           />
         )}
         {isOpen.type === "6" && <Loading />}
+        {isOpen.type === "7" && <Saved />}
       </ModalBox>
     </ModalDiv>
   );

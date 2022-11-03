@@ -5,7 +5,7 @@ import "antd/dist/antd.css";
 
 const Example = styled.div`
   text-align: center;
-  color: blue;
+  // color: blue;
   border-radius: 4px;
 `;
 

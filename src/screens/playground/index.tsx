@@ -248,6 +248,7 @@ const Playground = () => {
       currentCode,
       currentLanguage
     );
+    // closeModal();
   };
 
   // encode function => converts normal string to base64 encoded string

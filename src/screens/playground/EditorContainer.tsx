@@ -11,14 +11,17 @@ import {
 import Select from "react-select";
 import { ModalContext } from "../../context/ModalContext";
 import { languageMap } from "../../context/PlaygroundContext";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 const EditorBox = styled.div`
   display: flex;
-  flex-direction: column; ;
+  flex-direction: column;
+  background: var(--body) !important;
 `;
 
 const UpperToolBar = styled.div`
-  background: white;
+  background: var(--body);
+  color: var(--color);
   height: 4rem;
 
   display: flex;
@@ -34,6 +37,7 @@ const Title = styled.div`
 
   h3 {
     font-size: 1.3rem;
+    color: var(--color);
   }
 
   button {
@@ -52,6 +56,7 @@ const DropDowns = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  background: var(--body);
   // width: 15rem;
 
   & > div:nth-of-type(1) {
@@ -64,7 +69,7 @@ const DropDowns = styled.div`
 `;
 
 const LowerToolBar = styled.div`
-  background: white;
+  background: var(--body);
   height: 4rem;
 
   display: flex;
@@ -114,6 +119,22 @@ const SaveBtn = styled.button`
   border: 0;
 `;
 
+const customStyles = {
+  option: (provided: any, state: any) => ({
+    ...provided,
+    // borderBottom: "1px dotted pink",
+    background: state.isSelected ? "#0097d7" : "var(--body)",
+    color: state.isSelected ? "white" : "var(--color)",
+    // padding: 20,
+  }),
+  singleValue: (provided: any, state: any) => {
+    // const opacity = state.isDisabled ? 0.5 : 1;
+    // const transition = 'opacity 300ms';
+
+    return { ...provided };
+  },
+};
+
 interface EditorContainerProps {
   title: string;
   language: string;
@@ -137,7 +158,8 @@ const EditorContainer: React.FC<EditorContainerProps> = ({
   saveCode,
   runCode,
 }) => {
-  const { openModal } = useContext(ModalContext)!;
+  const { openModal, closeModal } = useContext(ModalContext)!;
+  const handle = useFullScreenHandle();
 
   const languageOptions = [
     { value: "c++", label: " C++" },
@@ -205,6 +227,18 @@ const EditorContainer: React.FC<EditorContainerProps> = ({
     });
   }
 
+  const exportUserCode = () => {
+    const fileData = JSON.stringify(code);
+    // const jsonToTxt = require("json-to-txt");
+    // const dataInString = jsonToTxt({ data: fileData });
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = "code.json";
+    link.href = url;
+    link.click();
+  };
+
   return (
     <EditorBox>
       <UpperToolBar>
@@ -237,25 +271,30 @@ const EditorContainer: React.FC<EditorContainerProps> = ({
             value={selectedLanguage}
             onChange={handleChangeLanguage}
             options={languageOptions}
+            styles={customStyles}
           />
           <Select
             value={selectedTheme}
             onChange={handleChangeTheme}
             options={themeOptions}
+            styles={customStyles}
           />
         </DropDowns>
       </UpperToolBar>
 
-      <CodeEditor
-        currentLanguage={selectedLanguage.value}
-        currentTheme={selectedTheme.value}
-        currentCode={code}
-        setCurrentCode={setCurrentCode}
-      />
+      <FullScreen handle={handle}>
+        <CodeEditor
+          currentLanguage={selectedLanguage.value}
+          currentTheme={selectedTheme.value}
+          currentCode={code}
+          setCurrentCode={setCurrentCode}
+          isFullScreen={handle.active}
+        />
+      </FullScreen>
 
       <LowerToolBar>
         <Button>
-          <button>
+          <button onClick={handle.enter}>
             <BiFullscreen />
             Full Screen
           </button>
@@ -271,7 +310,7 @@ const EditorContainer: React.FC<EditorContainerProps> = ({
             <BiImport />
             Import Code
           </label>
-          <button>
+          <button onClick={exportUserCode}>
             <BiExport />
             Export Code
           </button>

@@ -14,19 +14,31 @@ import { indentUnit } from "@codemirror/language";
 import { EditorState } from "@codemirror/state";
 import styled from "styled-components";
 
-const CodeEditorBox = styled.div`
-  height: calc(100vh - 12.5rem);
-
+const CodeEditorBox = styled.div<CodeEditorBoxTypes>`
   & > div {
     height: 100%;
   }
+
+  ${({ isFullScreen }) =>
+    !isFullScreen
+      ? `
+  height: calc(100vh - 12.5rem)
+  `
+      : `
+height: 100vh;
+`}
 `;
+
+interface CodeEditorBoxTypes {
+  isFullScreen: boolean;
+}
 
 interface CodeEditorProps {
   currentLanguage: string;
   currentTheme: string;
   currentCode: string;
   setCurrentCode: (newCode: string) => void;
+  isFullScreen: boolean;
 }
 
 const CodeEditor: React.FC<CodeEditorProps> = ({
@@ -34,6 +46,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   currentTheme,
   currentCode,
   setCurrentCode,
+  isFullScreen,
 }) => {
   const [theme, setTheme] = useState<any>(githubDark);
   const [lang, setLang] = useState<any>(java);
@@ -58,7 +71,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   }, [currentTheme]);
 
   return (
-    <CodeEditorBox>
+    <CodeEditorBox isFullScreen={isFullScreen}>
       <CodeMirror
         theme={theme}
         value={currentCode}

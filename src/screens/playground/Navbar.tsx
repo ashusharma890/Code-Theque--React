@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import DarkModeToggle from "react-dark-mode-toggle";
 
 const NavbarContainer = styled.div`
   height: 4rem;
-  background: #39c395;
+  background: var(--body1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,22 +35,45 @@ const MainHeading = styled.h1`
   }
 `;
 
+const Toggle = styled.div`
+  display: flex;
+  align-content: right;
+  justify-content: right;
+  background: var(--body1);
+`;
+
 const Navbar = () => {
   const navigate = useNavigate();
 
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  useEffect(() => {
+    document.body.dataset.theme = "light";
+  }, []);
+
+  const setMode = () => {
+    document.body.dataset.theme = isDarkMode ? "dark" : "light";
+    setIsDarkMode(!isDarkMode);
+    console.log(isDarkMode ? "dark" : "light");
+  };
+
   return (
-    <NavbarContainer>
-      <Navbarcontent
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        <Logo src="/logo.png" alt="" />
-        <MainHeading>
-          <span>Code</span> Theque
-        </MainHeading>
-      </Navbarcontent>
-    </NavbarContainer>
+    <>
+      <Toggle></Toggle>
+      <NavbarContainer>
+        <Navbarcontent
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <Logo src="/logo.png" alt="" />
+          <MainHeading>
+            <span>Code</span> Theque
+          </MainHeading>
+        </Navbarcontent>
+        <DarkModeToggle onChange={setMode} checked={!isDarkMode} size={80} />
+      </NavbarContainer>
+    </>
   );
 };
 
