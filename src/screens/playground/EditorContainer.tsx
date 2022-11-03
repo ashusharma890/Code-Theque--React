@@ -159,17 +159,15 @@ const EditorContainer: React.FC<EditorContainerProps> = ({
   saveCode,
   runCode,
 }) => {
-  const location = useLocation();
-  console.log(location.state.id);
-  useEffect(() => {
-    if (location.state.id === "dark") {
-      document.body.dataset.theme = "dark";
-    } else {
-      document.body.dataset.theme = "light";
-    }
-    // const location = useLocation();
-    // console.log(location.state.id);
-  }, []);
+  // const location = useLocation();
+  // console.log(location.state.id);
+  // useEffect(() => {
+  //   if (location.state.id === "dark") {
+  //     document.body.dataset.theme = "dark";
+  //   } else {
+  //     document.body.dataset.theme = "light";
+  //   }
+  // }, []);
   const { openModal, closeModal } = useContext(ModalContext)!;
   const handle = useFullScreenHandle();
 
