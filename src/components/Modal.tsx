@@ -8,6 +8,7 @@ import EditFolderTitle from "./modaltypes/EditFolderTitle";
 import NewCard from "./modaltypes/NewCard";
 import NewFolder from "./modaltypes/NewFolder";
 import NewFolderAndPlayground from "./modaltypes/NewFolderAndPlayground";
+import Loading from "./modaltypes/Loading";
 
 export const ModalDiv = styled.div`
   background: rgba(0, 0, 0, 0.4);
@@ -105,6 +106,7 @@ const Modal = () => {
             identifier={isOpen.identifier}
           />
         )}
+        {isOpen.type === "6" && <Loading />}
       </ModalBox>
     </ModalDiv>
   );

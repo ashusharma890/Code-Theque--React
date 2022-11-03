@@ -42,15 +42,21 @@ const InnerBox = styled.div`
   }
 `;
 
-const OutputArea = styled.div`
+const OutputArea = styled.textarea`
   background: #fff;
   flex-grow: 1;
   resize: none;
   padding: 0.25rem;
   padding-top: 0.5rem;
+  font-size: 1.1rem;
+  font-style: italic;
 `;
 
-const OutputConsole = () => {
+interface OutputConsoleProps {
+  currentOutput: string;
+}
+
+const OutputConsole: React.FC<OutputConsoleProps> = ({ currentOutput }) => {
   return (
     <OuterBox>
       <InnerBox>
@@ -60,7 +66,7 @@ const OutputConsole = () => {
           Export Output
         </button>
       </InnerBox>
-      <OutputArea></OutputArea>
+      <OutputArea value={currentOutput} disabled></OutputArea>
     </OuterBox>
   );
 };

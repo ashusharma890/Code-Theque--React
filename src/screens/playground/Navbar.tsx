@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const NavbarContainer = styled.div`
-  height: 4.5rem;
+  height: 4rem;
   background: #39c395;
   display: flex;
   align-items: center;

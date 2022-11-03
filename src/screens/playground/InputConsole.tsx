@@ -54,7 +54,15 @@ const StyledTextArea = styled.textarea`
   padding-top: 0.5rem;
 `;
 
-const InputConsole = () => {
+interface InputConsoleProps {
+  currentInput: string;
+  setCurrentInput: (newInput: string) => void;
+}
+
+const InputConsole: React.FC<InputConsoleProps> = ({
+  currentInput,
+  setCurrentInput,
+}) => {
   return (
     <OuterBox>
       <InnerBox>
@@ -64,7 +72,12 @@ const InputConsole = () => {
           Import Input
         </button>
       </InnerBox>
-      <StyledTextArea></StyledTextArea>
+      <StyledTextArea
+        value={currentInput}
+        onChange={(e) => {
+          setCurrentInput(e.target.value);
+        }}
+      ></StyledTextArea>
     </OuterBox>
   );
 };
