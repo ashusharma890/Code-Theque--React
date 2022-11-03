@@ -6,12 +6,12 @@ Built using TypeScript in ReactJs with Styled Components applied and Judge CE 0 
 
 Components created are in components folder inside "src" folder.
 
-<img src="https://user-images.githubusercontent.com/81765508/199782838-edd26ea8-df9d-4751-ad10-417e2314bc8a.png">
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/81765508/199785088-2d837e15-fead-4aee-924a-10069afd6522.png">
 
-<img src="https://user-images.githubusercontent.com/81765508/199783048-5635453e-c12a-40f7-8f5d-96ef082ba59b.png">
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/81765508/199784996-2f444910-4260-4684-a641-c8dc947249eb.png">
 
-<img src="https://user-images.githubusercontent.com/81765508/199783400-e7020f42-7a14-48ee-a266-f8b6e6e90f54.png">
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/81765508/199784795-60cb8ee9-43d1-4fa9-b2c2-5841c6aef2d7.png">
 
-<img src="https://user-images.githubusercontent.com/81765508/199783510-40976c0a-db7e-43c8-8d51-eb9372ea04c7.png">
+<<img width="960" alt="image" src="https://user-images.githubusercontent.com/81765508/199784639-9da29a5b-df9e-41b1-9121-e96d2ce43036.png">
 
 
