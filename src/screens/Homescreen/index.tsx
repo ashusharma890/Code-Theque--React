@@ -4,6 +4,7 @@ import Modal from "../../components/Modal";
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
 import { ModalContext } from "../../context/ModalContext";
+import Navbar from "../playground/Navbar";
 
 const HomeScreenSection = styled.div`
   // display: grid;
@@ -18,11 +19,14 @@ const HomeScreen = () => {
   const isOpen = ModalFeatures.isOpen;
 
   return (
-    <HomeScreenSection>
-      <LeftPane />
-      <RightPane />
-      {isOpen.value === true ? <Modal /> : <></>}
-    </HomeScreenSection>
+    <>
+      {/* <Navbar /> */}
+      <HomeScreenSection>
+        <LeftPane />
+        <RightPane />
+        {isOpen.value === true ? <Modal /> : <></>}
+      </HomeScreenSection>
+    </>
   );
 };
 

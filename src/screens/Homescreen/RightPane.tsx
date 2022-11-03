@@ -153,7 +153,7 @@ const RightPane = () => {
   const setMode = () => {
     document.body.dataset.theme = isDarkMode ? "dark" : "light";
     setIsDarkMode(!isDarkMode);
-    console.log(isDarkMode ? "dark" : "light");
+    // console.log(isDarkMode ? "dark" : "light");
   };
 
   return (
@@ -226,7 +226,11 @@ const RightPane = () => {
                 ([cardId, card]: [cardId: string, card: any]) => (
                   <Card
                     onClick={() => {
-                      navigate(`/code/${folderId}/${cardId}`);
+                      navigate(`/code/${folderId}/${cardId}`, {
+                        state: {
+                          id: "dark",
+                        },
+                      });
                     }}
                   >
                     <SmallLogo src="/logo.png" alt="" />

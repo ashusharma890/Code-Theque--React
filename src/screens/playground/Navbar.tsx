@@ -71,7 +71,7 @@ const Navbar = () => {
             <span>Code</span> Theque
           </MainHeading>
         </Navbarcontent>
-        <DarkModeToggle onChange={setMode} checked={!isDarkMode} size={80} />
+        {/* <DarkModeToggle onChange={setMode} checked={!isDarkMode} size={80} /> */}
       </NavbarContainer>
     </>
   );

@@ -8,6 +8,7 @@ import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import Page404 from "./screens/page404";
 import { ThemeContext } from "./context/ThemeContext";
 import { ThemeProvider } from "styled-components";
+// import { useLocation } from "react-router-dom";
 
 function App() {
   const { theme } = useContext(ThemeContext)!;
